@@ -2,12 +2,14 @@ var numberOfButton = document.querySelectorAll(".drum").length;
 for (var i = 0; i < numberOfButton; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function() {
         sound(this.innerHTML);
+        pressedKey(this.innerHTML);
     });
 }
 
 
 document.addEventListener("keypress", function(event) {
     sound(event.key);
+    pressedKey(event.key);
 });
 
 function sound(key) {
@@ -39,4 +41,12 @@ function sound(key) {
             break;
     }
     audio.play();
+}
+
+function pressedKey(key) {
+    $("." + key).addClass("pressed");
+
+    setTimeout(function() {
+        $("." + key).removeClass("pressed");
+    }, 500);
 }
